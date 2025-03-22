@@ -1494,6 +1494,14 @@ export class Battle {
 		for (const s of this.sides) {
 			if (s) s.activeRequest = null;
 		}
+
+		this.format.onBattleWin?.call(this);
+		for (const rule of this.ruleTable.keys()) {
+			if ('+*-!'.includes(rule.charAt(0))) continue;
+			const subFormat = this.dex.formats.get(rule);
+			subFormat.onBattleWin?.call(this);
+		}
+
 		return true;
 	}
 

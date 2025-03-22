@@ -470,6 +470,7 @@ export class Format extends BasicEffect implements Readonly<BasicEffect> {
 	) => Species | void;
 	declare readonly onBattleStart?: (this: Battle) => void;
 	declare readonly onTeamPreview?: (this: Battle) => void;
+	declare readonly onBattleWin?: (this: Battle) => void;
 	declare readonly onValidateSet?: (
 		this: TeamValidator, set: PokemonSet, format: Format, setHas: AnyObject, teamHas: AnyObject
 	) => string[] | void;

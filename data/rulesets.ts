@@ -680,6 +680,23 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 		},
 		// implemented in team preview
 	},
+	teamreveal: {
+		effectType: 'Rule',
+		name: 'Team Reveal',
+		desc: "Reveals all Pok&eacute;mon and their set information once the game ends.",
+		onBattleWin() {
+			for (const pokemon of this.getAllPokemon()) {
+				const details = pokemon.getFullDetails().secret;
+				const moves = [];
+				for (const move of pokemon.moves) {
+					moves.push(`${move}`);
+				}
+				this.add('reveal', pokemon, details, pokemon.item, pokemon.ability, pokemon.teraType, moves.join(','));
+			}
+			this.add('teamreveal');
+			this.add('-message', `Teams have been revealed!`);
+		},
+	},
 	onevsone: {
 		effectType: 'Rule',
 		name: 'One vs One',
