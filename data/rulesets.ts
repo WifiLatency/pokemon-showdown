@@ -685,15 +685,15 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 		name: 'Team Reveal',
 		desc: "Reveals all Pok&eacute;mon and their set information once the game ends.",
 		onBattleWin() {
+			this.add('teamreveal');
 			for (const pokemon of this.getAllPokemon()) {
 				const details = pokemon.getFullDetails().secret;
 				const moves = [];
-				for (const move of pokemon.moves) {
-					moves.push(`${move}`);
+				for (const move of pokemon.baseMoveSlots) {
+					moves.push(`${move.id}`);
 				}
 				this.add('reveal', pokemon, details, pokemon.item, pokemon.ability, pokemon.teraType, moves.join(','));
 			}
-			this.add('teamreveal');
 			this.add('-message', `Teams have been revealed!`);
 		},
 	},
